@@ -68,15 +68,86 @@ var averageBalance = function(array){
     return avg;
 };
 
-var firstLetterCount;
+var firstLetterCount = function(array, string){
+    let allMembers = _.filter(array, function(customerObj){
+        return customerObj.name[0].toUpperCase() === string[0].toUpperCase();
+    });
+    return allMembers.length;
+};
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, customer, letter){
+ var firstLetCount = _.reduce(array, function(acc, customerObj){
+     if(customerObj.name === customer){
+        let acc = _.filter(customerObj.friends, function(friend, i, friends){
+            return friend.name[0].toLowerCase() === letter.toLowerCase();
+        });
+       // console.log(acc);
+        return acc;
+     }
+     return acc;
+ }, []);
+ return firstLetCount.length;
+};
 
-var friendsCount;
+var friendsCount = function(array, customer){
+    
+    let resultArr = _.filter(array, function(customerObj){
+        let customerObjFriendsArr = customerObj.friends;
+        for(let i = 0; i < customerObjFriendsArr.length; i++){
+            if(customerObjFriendsArr[i].name === customer){
+                return customerObj;
+            }
+        }
+    });
+    return _.pluck(resultArr, 'name');
+};
 
-var topThreeTags;
+var topThreeTags = function(arr){
+    //declare variable result
+var result = []
+//assign the variable of tagsArray to a reduced version of the input array.
+var tagsArray = _.reduce(arr, function(acc, curr){
+    //get the tags from the current customer object and let it equal tags
+let tags = curr.tags;
+//concat all tags from each person into empty seed array
+acc = acc.concat(tags); 
+     return acc;
+},[]);
+// console.log(tagsArray);
+//code that counts the tags and puts them in a counter object with the objects as keys and numbers as values
+var tagsCountObj =_.reduce(tagsArray, function(acc, curr){
+    if(acc[curr]){
+        acc[curr] += 1;
+    } else {
+        acc[curr] = 1;
+    } return acc;
+}, {});
+//code that gets the counters with the max value
+    var getMax = object => {
+        return Object.keys(object).filter(x => {
+             return object[x] == Math.max.apply(null, 
+             Object.values(object));
+       });
+    };
+result = getMax(tagsCountObj);
+return result;
+};
 
-var genderCount;
+function genderCount(customerArray, obj = {}){
+    if(!customerArray.length){
+      //base case
+      return obj;
+    } else {
+      let gender = customerArray[0].gender;
+      if(obj[gender]){
+        obj[gender]++;
+      } else {
+        obj[gender] = 1;
+      }
+      return genderCount(customerArray.slice(1), obj);
+    }
+}
+console.log(genderCount(customers));
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
