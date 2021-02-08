@@ -104,7 +104,7 @@ var friendsCount = function(array, customer){
 
 var topThreeTags = function(arr){
     //declare variable result
-var result = []
+var result = [];
 //assign the variable of tagsArray to a reduced version of the input array.
 var tagsArray = _.reduce(arr, function(acc, curr){
     //get the tags from the current customer object and let it equal tags

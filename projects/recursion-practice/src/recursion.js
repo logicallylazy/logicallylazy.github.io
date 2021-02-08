@@ -212,32 +212,32 @@ if(str1[0] !== str2[0]) {
 // occupies an index of the array.
 var createArray = function(str, arr = []){
   
-  if(str.length === 0){
-    return arr;
-  } else if(str.length > 0){
-    arr.push(str.charAt(0));
+  if(str.length === 0){ // if str.length is === 0
+    return arr; // return arr
+  } else if(str.length > 0){ // if string is > 0
+    arr.push(str.charAt(0)); // push str into array
   }
-  return createArray(str.slice(1), arr);
+  return createArray(str.slice(1), arr); // return with function call
 };
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
-  if(!array.length){
-    return array;
+  if(!array.length){ // if array has not length
+    return array; // return array
   }
-  return reverseArr(array.slice(1)).concat(array[0]);
+  return reverseArr(array.slice(1)).concat(array[0]); // function call with array going reversed
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length, arr = []) {
-  if(arr.length === length){
-    return arr;
+  if(arr.length === length){ // if array has a length
+    return arr; // return array
   }
-  if(arr.length < length){
-    arr.push(value);
-    return buildList(value, length, arr);
+  if(arr.length < length){ // if the length of the array is greater than length param
+    arr.push(value); // push value into array
+    return buildList(value, length, arr); // return list
   }
 };
 
@@ -245,16 +245,16 @@ var buildList = function(value, length, arr = []) {
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function(array, value, counter = 0) {
-  if(array.length === 0){
-    return counter;
-  } else if(array.length > 0){
-    if(array[0] === value){
-        counter++;
+  if(array.length === 0){ // if array has a length of zero
+    return counter; // return counter
+  } else if(array.length > 0){ // if array length is > zero
+    if(array[0] === value){ // of the first value of the array has a value
+        counter++; // coutner increase
     }
-    return countOccurrence(array.slice(1), value, counter);
+    return countOccurrence(array.slice(1), value, counter); // return function call with array
   }
   
-  return counter;
+  return counter; // return counter
 };
 
 // 20. Write a recursive version of map.
@@ -314,12 +314,12 @@ var nthFibo = function(n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function(input, arr = []) {
-  if(input.length === 0){
-    return arr;
-  } if(input.length >= 1){
-    arr.push(input[0].toUpperCase());
+  if(input.length === 0){ // if the length of the array = 0
+    return arr; // return array
+  } if(input.length >= 1){ // if the length of the array is >= 1
+    arr.push(input[0].toUpperCase()); // push input into new array
   }
-  return capitalizeWords(input.splice(1), arr);
+  return capitalizeWords(input.splice(1), arr); // return function with imnput and spliced
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
@@ -372,7 +372,18 @@ var letterTally = function(str, obj = {}) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function(list) {
+var compress = function(list, result = []) {
+  if(list.length === 0){
+    return result;
+  }
+  if(list.length === 1){
+    result.push(list[0]);
+    return result;
+  }
+  if(list[0] !== list[1]){
+    result.push(list[0]);
+  }
+  return compress(list.slice(1), result);
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -384,7 +395,19 @@ var augmentElements = function(array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function(array) {
+var minimizeZeroes = function(array, result = []) {
+  if(array.length === 0){
+    return result;
+  }
+  if(array[0] !== 0){
+    result.push(array[0]);
+    return minimizeZeroes(array.slice(1), result);
+  }
+  if(array[0] !== array[1]){
+    result.push(array[0]);
+    return minimizeZeroes(array.slice(1), result);
+  }
+  return minimizeZeroes(array.slice(1), result);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -392,14 +415,42 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if(array.length === 0){
+    return array;
+  }
+  if(array[0] < 0){
+    array[0] = -array[0];
+  }
+  if(array[1] > 0){
+    array[1] = -array[1];
+  }
+  return [array[0], array[1]].concat(alternateSign(array.slice(2)));
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
-var numToText = function(str) {
+ var numToText = function(str, newStr = [], words = str.split(" ")){
+  if(words.length === 0){
+    return newStr.join(" ");
+  }
+  if(words.length > 0){
+    words[0] = words[0].replace("1", "one");
+    words[0] = words[0].replace("2", "two");
+    words[0] = words[0].replace("3", 'three');
+    words[0] = words[0].replace("4", 'four');
+    words[0] = words[0].replace("5", "five");
+    words[0] = words[0].replace("6", "six");
+    words[0] = words[0].replace("7", "seven");
+    words[0] = words[0].replace("8", "eight");
+    words[0] = words[0].replace("9", "nine");
+    newStr.push(words[0]);
+    return numToText(str, newStr, words.slice(1));
+  } else {
+    newStr.push(words[0]);
+    return numToText(str, newStr, words.slice(1));
+  }
 };
-
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.

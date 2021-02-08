@@ -12,6 +12,8 @@
 * The code to be executed, by the function, is placed inside curly brackets: {}
 *
 * Paramaters are the place holders of aurguments in the function
+* Aurguments are the data that is passed into a functions parameters
+* It is good practice to name your parameters relitive to the auguments they will be holding
 *
 * When JavaScript reaches a return statement, the function will stop executing.
 * If the function was invoked from a statement, "return" will excute the code after
@@ -30,6 +32,8 @@ function multiply(num1, num2) {
 
 multiply(2, 5); // ==> 10
 
+// parameters: num1 and num2
+// aurguments: 2 and 5
 
 // assigning a functions to a variable
 
@@ -38,11 +42,14 @@ multiply(2, 5); // ==> 10
 
 
 
-function greet(name) {
+var greet = function(name) {
   console.log("Hello, " + name + "!");
-}
+};
 
 greet("Chris");
+
+// parameter: name
+// aurgument: string of "Chris"
 
 // Scope:
 

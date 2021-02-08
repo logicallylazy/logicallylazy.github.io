@@ -23,6 +23,7 @@
 // }
 
 // else is used lastly and closes your if statement
+// else does not require a condition, it is your DEFULT option
 
 if(this === true){
     return true;
@@ -31,6 +32,11 @@ if(this === true){
 } else {
     console.log("Well what else could it be?");
 }
+
+
+// The advantage of an IF, ELSE IF, ELSE IF, …, ELSE structure is that the computer stops checking further conditions if a condition is fulfilled.
+// Using If more than once leads the computer to check for multiple condtions at the same time,
+// Using ELSE IF keeps the program checking for that SPECIFIC condition!
 
 
 // lastly there is the Switch Statement

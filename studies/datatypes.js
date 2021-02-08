@@ -166,7 +166,25 @@ var favColor
 // If the callee modifies the parameter variable, 
 // the effect is visible to the caller's variable.
 
+var myName = {
+  firstName: "Christopher"
+};
+var identity = myName;
+myName.firstName = "Joseph";
+
+console.log(myName.firstName); // "Joseph"
+console.log(identity.firstName); // "Joseph"
+
+
+
 // When a parameter is passed by value,
 // the caller and callee have two independent variables with the same value. 
 // If the callee modifies the parameter variable,
 // the effect is not visible to the caller.
+
+var name = "Christopher";
+var firstName = name;
+name = "Joseph";
+
+console.log(name); // "Joseph"
+console.log(firstName); // "Christopher"
